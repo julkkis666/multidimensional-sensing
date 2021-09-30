@@ -8,9 +8,6 @@ def visualize_data(timestamps, x_arr,y_arr,z_arr,s_arr,m_arr):
 
   #Plotting accelerometer readings  
   plt.figure(1)
-  #plt.plot(timestamps, x_arr, color = "yellow",linewidth=1.0)
-  #plt.plot(timestamps, y_arr, color = "red",linewidth=1.0)
-  #plt.plot(timestamps, z_arr, color = "green",linewidth=1.0)
   plt.plot(timestamps, s_arr, color = "black",linewidth=1.0)
   plt.plot(timestamps, m_arr, color = "blue",linewidth=1.0)
   plt.show()
@@ -61,7 +58,7 @@ def count_steps(timestamps, x_arr, y_arr, z_arr, m_arr):
     elif(m_arr[i] < threshold and (isLow == False)):
       isLow = True
     last = m_arr[i]
-  print("old way to count gives:",non_dynamic_ans)
+  print("Static Algorithm gives:",non_dynamic_ans)
   return rv, th
 
 #Calculate the magnitude of the given vector
@@ -72,7 +69,6 @@ def magnitude(x,y,z):
 #Takes timestamp-array and array of times that step was detected as an input
 #Returns an array where each entry is either zero if corresponding timestamp has no step detected or 50000 if the step was detected
 def generate_step_array(timestamps, step_time, treshold):
-  print(treshold)
   s_arr = []
   ctr = 0
   for i, time in enumerate(timestamps):
@@ -105,8 +101,9 @@ def main():
   datafile2 = "out_sabsa_manysteps.csv"
   datafile3 = "out_sabsa_diffusasteps.csv"
   datafile4 = "out_sabsa_inpantssteps.csv"
+  datafile5 = "out_sabsa_29steps.csv"
 
-  datafiles = [datafile1, datafile2, datafile3, datafile4]
+  datafiles = [datafile1, datafile2, datafile3, datafile4, datafile5]
 
   for datafile in datafiles:
     timestamps, x_array, y_array, z_array = read_data(datafile)
